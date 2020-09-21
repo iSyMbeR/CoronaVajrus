@@ -13,6 +13,8 @@ public class LocationStats {
      private int latestTotalCases;
      private String state;
      private String country;
+     private int diffBetweenLastAndPrevDay;
+     private int lastDayCases;
 
 
 }
