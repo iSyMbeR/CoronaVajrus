@@ -1,8 +1,10 @@
 package kom.symber.koronavajrus.models;
 
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 
 @Setter
 @Getter
@@ -10,11 +12,11 @@ import lombok.ToString;
 public class LocationStats {
 
 
+
      private int latestTotalCases;
      private String state;
      private String country;
      private int diffBetweenLastAndPrevDay;
-     private int lastDayCases;
 
 
 }

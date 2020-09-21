@@ -1,9 +1,11 @@
 package kom.symber.koronavajrus.services;
 
+import kom.symber.koronavajrus.controllers.HomeController;
 import kom.symber.koronavajrus.models.LocationStats;
 import lombok.Getter;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class CoronaVajrusDataService {
 
     private static String data_URL= "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv";
     private List<LocationStats> allStats = new ArrayList<>();
+    int latestCases;
+    @Autowired
+    HomeController homeController;
 
     @PostConstruct
     @Scheduled(cron = "* * 1 * * *")
@@ -44,9 +49,8 @@ public class CoronaVajrusDataService {
             LocationStats locationStats = new LocationStats();
             locationStats.setState(record.get("Province/State"));
             locationStats.setCountry(record.get("Country/Region"));
-            int latestCases = Integer.parseInt(record.get(record.size() - 1));
+            latestCases = Integer.parseInt(record.get(record.size() - 1));
             int prevDayCases = Integer.parseInt(record.get(record.size() - 2));
-            locationStats.setLastDayCases(latestCases);
             locationStats.setLatestTotalCases(latestCases);
             locationStats.setDiffBetweenLastAndPrevDay(abs(latestCases-prevDayCases));
             newStats.add(locationStats);
