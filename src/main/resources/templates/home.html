@@ -5,21 +5,32 @@
 <head>
     <title>KORONA WAJRUS INFO</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="/style.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
 <body>
 
-
-<h1>KORONA WAJRUS INFO</h1>
-<p>This app lists the current number of cases reported across the glboal</p>
+<div class="container">
+    <h1>KORONA WAJRUS INFO</h1>
+    <p>This app lists the current number of cases reported across the global</p>
 
 <div class="jumbotron">
     <h1 class="display-4" th:text="${totalReportedCases}"></h1>
     <p class="lead">Total cases reported as of today</p>
+    <hr class ="my-4">
+    <p>
+        <span>New cases reported since yesterday </span>
+        <span th:text="${totalNewCasesLastDay}"}></span>
+    </p>
+    <p>
+        <span>The greatest number of cases </span>
+        <span th:text="${leaderNewCasesLastDayNumber}"}></span>
+
+    </p>
 </div>
-<div class="container">
-    <table>
+
+    <table class="table table-bordered">
         <tr>
             <th>State</th>
             <th>Country</th>
@@ -27,6 +38,7 @@
             <th>LastDay cases</th>
 
         </tr>
+
         <tr th:each="locationStat : ${locationStats}">
             <td th:text="${locationStat.state}"></td>
             <td th:text="${locationStat.country}"></td>
